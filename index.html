@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>uwlecow</title>
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="./assets/css/app.css" rel="stylesheet" media="screen">
+</head>
+<body>
+	<div class="page-header">
+	  <h1>UW - La Crosse <small>Ecological Data Warehouse</small></h1>
+	</div>
+
+<!-- Tabs -->
+
+	<ul class="nav nav-tabs">
+	  <li class="tab active"><a href="#">Upload</a></li>
+	  <li class="tab"><a href="#">Download</a></li>
+	  <li class="tab"><a href="#">Create</a></li>
+	  <li class="tab"><a href="#">Modify</a></li>
+	</ul>
+
+<!-- Tab Bodies -->
+
+	<div id="Upload">
+		<ul id="wgs">
+		</ul>
+	</div>
+
+	<div id="Download" class="hidden"> 
+		Download Div 
+	</div>
+
+	<div id="Create" class="hidden"> 
+		<ul class="nav nav-pills" id="Create-pills">
+		  <li class="pill active"><a href="#">File Group</a></li>
+		  <li class="pill" ><a href="#">Working Group</a></li>
+		  <li class="pill"><a href="#">User</a></li>
+		</ul>
+	</div>
+
+	<div id="Modify" class="hidden"> 
+		<ul class="nav nav-pills" id="Modify-pills">
+		  <li class="pill active"><a href="#">File Group</a></li>
+		  <li class="pill" ><a href="#">Working Group</a></li>
+		  <li class="pill"><a href="#">User</a></li>
+		</ul>
+	</div>
+
+	<!-- templates -->
+	<script type="text/template" id="wgItem-template">
+	<li>
+	    <%= name %>,
+	    <%= description %>
+	</li>
+	</script>
+
+	<script type="text/template" id="wgRolo-template">
+	Yo, rolo template.
+	</script>
+
+	<!-- assets -->
+	<script src="./assets/js/jquery-1.8.2.min.js"></script>
+	<script src="./assets/js/underscore-min.js"></script>
+	<script src="./assets/js/backbone-min.js"></script>
+	<script src="./assets/js/bootstrap.min.js"></script>
+
+	<!-- backbone -->
+	<script src="./backbone/app.js"></script>
+
+	<!-- collections -->
+	<script src="./backbone/collections/fgrolodex.js"></script>
+	<script src="./backbone/collections/wgrolodex.js"></script>
+	<script src="./backbone/collections/folder.js"></script>
+
+	<!-- views -->
+	<script src="./backbone/views/wgview.js"></script>
+	<script src="./backbone/views/wgrolodexview.js"></script>
+
+	<!-- models -->
+	<script src="./backbone/models/fg.js"></script>
+	<script src="./backbone/models/wg.js"></script>
+	<script src="./backbone/models/file.js"></script>
+	<script src="./backbone/models/user.js"></script>
+
+</body>
+</html>
