@@ -55,30 +55,29 @@ app.get('/', staticResources.index);
 app.get(/assets\/.*/, staticResources.serveResource);
 app.get(/backbone\/.*/, staticResources.serveResource);
 
-
 app.get('/users', user.findAll);
 app.get('/users/:id', user.findById);
 app.post('/users', user.addUser);
 app.put('/users/:id', user.updateUser);
-app.delete('users/:id', user.deleteUser);
+app.delete('/users/:id', user.deleteUser);
 
 app.get('/wgs', wg.findAll);
 app.get('/wgs/:id', wg.findById);
 app.post('/wgs', wg.addWG);
 app.put('/wgs/:id', wg.updateWG);
-app.delete('wgs/:id', wg.deleteWG);
+app.delete('/wgs/:id', wg.deleteWG);
 
 app.get('/fgs', fg.findAll);
 app.get('/fgs/:id', fg.findById);
 app.post('/fgs', fg.addFG);
 app.put('/fgs/:id', fg.updateFG);
-app.delete('fgs/:id', fg.deleteFG);
+app.delete('/fgs/:id', fg.deleteFG);
 
 app.get('/files', file.findAll);
 app.get('/files/:id', file.findById);
 app.post('/files', file.addFile);
 app.put('/files/:id', file.updateFile);
-app.delete('files/:id', file.deleteFile);
+app.delete('/files/:id', file.deleteFile);
  
 app.listen(3000);
 console.log('Listening on port 3000...');

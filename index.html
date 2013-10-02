@@ -1,51 +1,77 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>uwlecow</title>
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="./assets/css/app.css" rel="stylesheet" media="screen">
+    <link href="./assets/img/glyphicons-halflings-white.png"></link>
 </head>
 <body>
+
 	<div class="page-header">
 	  <h1>UW - La Crosse <small>Ecological Data Warehouse</small></h1>
 	</div>
 
-<!-- Tabs -->
-
-	<ul class="nav nav-tabs">
-	  <li class="tab active"><a href="#">Upload</a></li>
-	  <li class="tab"><a href="#">Download</a></li>
-	  <li class="tab"><a href="#">Create</a></li>
-	  <li class="tab"><a href="#">Modify</a></li>
-	</ul>
-
-<!-- Tab Bodies -->
-
-	<div id="Upload">
-		<ul id="wgs">
-		</ul>
+	<div id="upload-files" class="container" style="border: 1px solid lightslategray; padding: 10px">
+		<fieldset>
+			<legend> Upload Files </legend>
+			<form id="upload-files-form" name="upload-files-form" enctype="multipart/form-data" class="no-margin form-horizontal">
+				<div class="control-group">	
+					<input id="files-to-upload" type="file" name="file" multiple="multiple" />
+				</div>
+				<div class="control-group">
+					<input type="text" name="file-working-group" id="file-working-group" data-provide="typeahead" placeholder="Working Group">
+				</div>
+				<div class="control-group">
+					<input type="text" name="file-file-group" data-provide="typeahead" placeholder="File Group">
+				</div>
+				<div id="file-upload-status" class="alert alert-success hidden"> 
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<b> Success! </b> Your file upload is complete. 
+				</div> 	
+				<div class="form-actions">
+					<button type="button" class="btn">Cancel</button>
+			        <input type="submit" id="upload-files-btn" name="submit" value="Upload" class="btn btn-primary">
+			    </div>
+			</form>
+		</fieldset>
 	</div>
 
-	<div id="Download" class="hidden"> 
-		Download Div 
-	</div>
+	<div id="create-working-group">
+		<fieldset>
+			<legend> Working Group </legend>
+			<form id="wgCreateForm" action="#" class="form-inline">
+		        <input id="name" placeholder="Name" type="text" />
+		        <input id="description" placeholder="Description" type="text" />
+		        <button class="btn btn-primary" id="addWG">Add</button>
+			</form>
+		</fieldset>
+	</div>   
 
-	<div id="Create" class="hidden"> 
-		<ul class="nav nav-pills" id="Create-pills">
-		  <li class="pill active"><a href="#">File Group</a></li>
-		  <li class="pill" ><a href="#">Working Group</a></li>
-		  <li class="pill"><a href="#">User</a></li>
-		</ul>
-	</div>
+	<div id="create-file-group">
+		<fieldset>
+			<legend> File Group </legend>
+			<form id="fgCreateForm" action="#" class="form-inline">
+		        <input id="name" placeholder="Name" type="text" />
+		        <input id="description" placeholder="Description" type="text" />
+		        <button class="btn btn-primary" id="add">Add</button>
+			</form>
+		</fieldset>
+	</div> 	
 
-	<div id="Modify" class="hidden"> 
-		<ul class="nav nav-pills" id="Modify-pills">
-		  <li class="pill active"><a href="#">File Group</a></li>
-		  <li class="pill" ><a href="#">Working Group</a></li>
-		  <li class="pill"><a href="#">User</a></li>
-		</ul>
-	</div>
+	<div id="create-user">
+		<fieldset>
+			<legend> User </legend>
+			<form id="userCreateForm" action="#" class="form-inline">
+		        <input id="firstname" placeholder="First" type="text" />
+		        <input id="lastname" placeholder="Last" type="text" />
+		        <input id="email" placeholder="Email" type="text" />
+		        <input id="pw" placeholder="Password" type="text" />
+		        <button class="btn btn-primary" id="add">Add</button>
+			</form>
+		</fieldset>
+	</div> 			
 
 	<!-- templates -->
 	<script type="text/template" id="wgItem-template">
@@ -55,33 +81,42 @@
 	</li>
 	</script>
 
-	<script type="text/template" id="wgRolo-template">
-	Yo, rolo template.
-	</script>
-
 	<!-- assets -->
 	<script src="./assets/js/jquery-1.8.2.min.js"></script>
 	<script src="./assets/js/underscore-min.js"></script>
 	<script src="./assets/js/backbone-min.js"></script>
 	<script src="./assets/js/bootstrap.min.js"></script>
 
-	<!-- backbone -->
-	<script src="./backbone/app.js"></script>
-
-	<!-- collections -->
-	<script src="./backbone/collections/fgrolodex.js"></script>
-	<script src="./backbone/collections/wgrolodex.js"></script>
-	<script src="./backbone/collections/folder.js"></script>
-
 	<!-- views -->
 	<script src="./backbone/views/wgview.js"></script>
-	<script src="./backbone/views/wgrolodexview.js"></script>
 
 	<!-- models -->
 	<script src="./backbone/models/fg.js"></script>
 	<script src="./backbone/models/wg.js"></script>
 	<script src="./backbone/models/file.js"></script>
 	<script src="./backbone/models/user.js"></script>
+
+	<!-- collections -->
+	<script src="./backbone/collections/workinggroups.js"></script>
+
+	<!-- backbone -->
+	<script src="./backbone/app.js"></script>	
+
+	<script>
+		// Populate the working group dropdown for file upload.
+		var wgcollection = new WorkingGroups(); // Instantiate the collection.
+	  	var initiateWGDropDown = function() {
+  			$("#file-working-group").typeahead({
+	    		source : wgcollection.pluck( 'name' ),    	
+		    	updater: function(item) {
+		       		// Opportunity to execute logic based on selected value
+		        	// ...
+		        	return item;
+		    	},
+			});
+  		};	
+	  	wgcollection.fetch({success : initiateWGDropDown});
+	</script>
 
 </body>
 </html>
