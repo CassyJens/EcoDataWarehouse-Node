@@ -1,4 +1,14 @@
-var mongo = require('mongodb');
+var mongo = require('mongodb'), 
+    MongoClient = require('mongodb').MongoClient,
+    Server = require('mongodb').Server,
+    ReplSetServers = require('mongodb').ReplSetServers,
+    ObjectID = require('mongodb').ObjectID,
+    Binary = require('mongodb').Binary,
+    GridStore = require('mongodb').GridStore,
+    Grid = require('mongodb').Grid,
+    Code = require('mongodb').Code,
+    assert = require('assert'),
+    fs = require("fs");
 
 var Server = mongo.Server,
     Db = mongo.Db,
@@ -22,33 +32,75 @@ exports.findAll = function(req, res) {
     });
 }
 
-exports.addFile = function(req, res) {
-    
-    //var file = req.body;
-    //console.log('Adding file: ' + JSON.stringify(file));
+exports.addFile = function(req, res) {                 
 
-    var gs = new mongo.GridStore(
-        db, 
-        'users.js', 
-        'w'
-    );
+// body: { theWG: 'Thanks for the pluck method.', theFG: 'undefined' },
+//   files: 
+//    { theFile: 
+//       { domain: null,
+//         _events: {},
+//         _maxListeners: 10,
+//         size: 1523,
+//         path: '/var/folders/vr/37mdmwzj5jlg8rj94l41plrc0000gp/T/fcba6bd6e06edcb2426571a1b24ba8e5',
+//         name: 'Day1.txt',
+//         type: 'text/plain',
+//         hash: null,
+//         lastModifiedDate: Mon Sep 30 2013 18:40:12 GMT-0500 (CDT),
+//         _writeStream: [Object],
+//         open: [Function],
+//         toJSON: [Function],
+//         write: [Function],
+//         end: [Function],
+//         setMaxListeners: [Function],
+//         emit: [Function],
+//         addListener: [Function],
+//         on: [Function],
+//         once: [Function],
+//         removeListener: [Function],
+//         removeAllListeners: [Function],
+//         listeners: [Function] } },
+         
+        var wg = req.body.theWG;
+        var fg = req.body.theFG;
+        var file = req.files.theFile;
 
-    gs.open(function(err, gs){
-        console.log('this file was uploaded at ' + gs.uploadDate);
-    });
+        // file.name;
+        // file.type;
+        // file.path;
+        // file.size;
+        // file.lastModifiedDate
 
-    res.send(200);
+        var fileId = new ObjectID();
+        var gridStore = new GridStore(db, fileId, file.name, 'w', {
+            'content_type': file.type,
+            'metadata': {
+                'fg': fg,
+                'wg': wg
+            },
+        });
+        var fileSize = fs.statSync(file.path).size;
+        var data = fs.readFileSync(file.path);
 
-    // db.collection('files', function(err, collection) {
-    //     collection.insert(file, {safe:true}, function(err, result) {
-    //         if (err) {
-    //             res.send({'error':'An error has occurred'});
-    //         } else {
-    //             console.log('Success: ' + JSON.stringify(result[0]));
-    //             res.send(result[0]);
-    //         }
-    //     });
-    // });
+        gridStore.open(function(err, gridStore) {
+            gridStore.writeFile(file.path, function(err, doc) {
+                gridStore.close(function(result){
+                  GridStore.read(db, fileId, function(err, fileData) {
+                    assert.equal(data.toString('base64'), fileData.toString('base64'))
+                    assert.equal(fileSize, fileData.length);
+                  });
+                })
+            });
+        }); 
+
+        res.send('/');     
+}
+
+function createFileObject(file) {
+    var myObject = new Object();
+    myObject.name = file.name;
+    myObject.description = "";
+    myObject.type = file.type;
+    return myObject;
 }
 
 exports.updateFile = function(req, res) {

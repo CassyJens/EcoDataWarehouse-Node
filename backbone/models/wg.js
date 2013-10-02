@@ -1,6 +1,7 @@
-var Wg = Backbone.Model.extend({
-		defaults: {
-			name: 'Working Group',
-			description: 'A working group.'
-		}
-	});
+var Wg = Backbone.Model.extend({	
+	idAttribute: '_id',
+	defaults: {
+		name: 'Working Group',
+		description: 'A working group.'
+	}
+});
