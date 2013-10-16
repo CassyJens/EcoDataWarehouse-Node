@@ -24,7 +24,7 @@
 					<input type="text" name="file-working-group" id="file-working-group" data-provide="typeahead" placeholder="Working Group">
 				</div>
 				<div class="control-group">
-					<input type="text" name="file-file-group" data-provide="typeahead" placeholder="File Group">
+					<input type="text" name="file-file-group" id="file-file-group" data-provide="typeahead" placeholder="File Group">
 				</div>
 				<div id="file-upload-status" class="alert alert-success hidden"> 
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -55,7 +55,7 @@
 			<form id="fgCreateForm" action="#" class="form-inline">
 		        <input id="name" placeholder="Name" type="text" />
 		        <input id="description" placeholder="Description" type="text" />
-		        <button class="btn btn-primary" id="add">Add</button>
+		        <button class="btn btn-primary" id="addFG">Add</button>
 			</form>
 		</fieldset>
 	</div> 	
@@ -68,10 +68,10 @@
 		        <input id="lastname" placeholder="Last" type="text" />
 		        <input id="email" placeholder="Email" type="text" />
 		        <input id="pw" placeholder="Password" type="text" />
-		        <button class="btn btn-primary" id="add">Add</button>
+		        <button class="btn btn-primary" id="addUser">Add</button>
 			</form>
 		</fieldset>
-	</div> 			
+	</div>
 
 	<!-- templates -->
 	<script type="text/template" id="wgItem-template">
@@ -89,6 +89,8 @@
 
 	<!-- views -->
 	<script src="./backbone/views/wgview.js"></script>
+	<script src="./backbone/views/fgview.js"></script>
+	<script src="./backbone/views/userview.js"></script>
 
 	<!-- models -->
 	<script src="./backbone/models/fg.js"></script>
@@ -98,6 +100,8 @@
 
 	<!-- collections -->
 	<script src="./backbone/collections/workinggroups.js"></script>
+	<script src="./backbone/collections/filegroups.js"></script>
+	<script src="./backbone/collections/users.js"></script>
 
 	<!-- backbone -->
 	<script src="./backbone/app.js"></script>	
@@ -116,6 +120,19 @@
 			});
   		};	
 	  	wgcollection.fetch({success : initiateWGDropDown});
+
+	  	// Do the same for the file group dropdown
+	  	var fgcollection = new FileGroups();
+	  	var initiateFGDropDown = function() {
+	  		console.log("length of fgcollection is: [" + fgcollection.length + "]");
+	  		$("#file-file-group").typeahead({
+	  			source : fgcollection.pluck( 'name' ),
+	  			updater: function(item) {
+	  				return item;
+	  			},
+	  		});
+	  	};
+	  	fgcollection.fetch({success : initiateFGDropDown});
 	</script>
 
 </body>

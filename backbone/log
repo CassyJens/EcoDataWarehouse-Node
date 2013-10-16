@@ -1,0 +1,6 @@
+things learned while working with dynamic sql
+1. Any variables added to a dynamic string must be nvarchar(max) or of a specific length
+2. Any variables "" must be at least nvarchar
+3. Any variables "" may not be anything other than nvarchar
+4. nvarchar(size) is very important in how dynamic sql works
+5. Print out the dynamic sql to make sure it's something (if you don't concat variables using nvarchar, it will be nothing)
