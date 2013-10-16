@@ -4,8 +4,6 @@ $(function(){
 		$("#upload-options").show();
 	});	
 
-
-
 	$(".upload-option").click(function() {
 		toggleVisibility(this);
 	});
@@ -22,10 +20,17 @@ $(function(){
 		} 
 	};
 
-
 	var myWg = new Wg({});
 	var wgView = new WgView({model: myWg});
 	wgView.render();
+
+	var myFg = new Fg({});
+	var fgView = new FgView({model: myFg});
+	fgView.render();
+
+	var myUser = new User({});
+	var userView = new UserView({model: myUser});
+	userView.render();
 
 	// Create a new view and render
 	// var myWg = new Wg({});
@@ -63,17 +68,14 @@ $(function(){
 
 	$('#upload-files-btn').click(function() {
 
-  		// todo send a post for each individual file here.
   		var fileInput = document.getElementById("files-to-upload");
-  		var files = fileInput.files;
-  		var file;
-
+  		var file, files = fileInput.files;
   		var workingGroup = $("#file-working-group").val();
   		var fileGroup = $("#file-file-group").val();
 
-  		console.log('Working Group is: ' + workingGroup);
-  		console.log('File Group is: ' + fileGroup);
-  		console.log('Number of files: ' + files.length);
+  		console.log('Working Group is: [' + workingGroup + "]");
+  		console.log('File Group is: [' + fileGroup + "]");
+  		console.log('Number of files: [' + files.length + "]");
 
   		for(var i = 0; i < files.length; i++){
 
