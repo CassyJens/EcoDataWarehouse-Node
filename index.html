@@ -10,10 +10,10 @@
 <body>
 
 	<div class="page-header">
-	  <h1>UW - La Crosse <small>Ecological Data Warehouse</small></h1>
+	  <h1>UW-La Crosse <small>Ecological Data Warehouse</small></h1>
 	</div>
 
-	<div id="upload-files" class="container" style="border: 1px solid lightslategray; padding: 10px">
+	<div id="upload-files" class="container" style="border: 1px solid lightslategray; padding: 10px; background-color: rgb(253, 251, 242)">
 		<fieldset>
 			<legend> Upload Files </legend>
 			<form id="upload-files-form" name="upload-files-form" enctype="multipart/form-data" class="no-margin form-horizontal">
@@ -27,13 +27,11 @@
 					<input type="text" name="file-file-group" id="file-file-group" data-provide="typeahead" placeholder="File Group">
 				</div>
 				<div id="file-upload-status" class="alert alert-success hidden"> 
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<button type="button" class="close" data-hide="alert">&times;</button>
 					<b> Success! </b> Your file upload is complete. 
 				</div> 	
-				<div class="form-actions">
-					<button type="button" class="btn">Cancel</button>
-			        <input type="submit" id="upload-files-btn" name="submit" value="Upload" class="btn btn-primary">
-			    </div>
+				<button type="button" class="btn">Cancel</button>
+		        <input type="submit" id="upload-files-btn" name="submit" value="Upload" class="btn btn-primary">
 			</form>
 		</fieldset>
 	</div>
@@ -46,6 +44,10 @@
 		        <input id="description" placeholder="Description" type="text" />
 		        <button class="btn btn-primary" id="addWG">Add</button>
 			</form>
+			<div id="wgCreateSuccess" class="alert alert-success hidden"> 
+				<button type="button" class="close" data-hide="alert">&times;</button>
+				<p><b> Success! </b> Your working group has been created.</p>
+			</div> 				
 		</fieldset>
 	</div>   
 
@@ -57,6 +59,10 @@
 		        <input id="description" placeholder="Description" type="text" />
 		        <button class="btn btn-primary" id="addFG">Add</button>
 			</form>
+			<div id="fgCreateSuccess" class="alert alert-success hidden"> 
+				<button type="button" class="close" data-hide="alert">&times;</button>
+				<p><b> Success! </b> Your file group has been created. </p>
+			</div> 				
 		</fieldset>
 	</div> 	
 
@@ -70,6 +76,10 @@
 		        <input id="pw" placeholder="Password" type="text" />
 		        <button class="btn btn-primary" id="addUser">Add</button>
 			</form>
+			<div id="userCreateSuccess" class="alert alert-success hidden"> 
+				<button type="button" class="close" data-hide="alert">&times;</button>
+				<p> <b> Success! </b> Your new user has been created. </p>
+			</div> 				
 		</fieldset>
 	</div>
 
@@ -88,8 +98,8 @@
 	<script src="./assets/js/bootstrap.min.js"></script>
 
 	<!-- views -->
-	<script src="./backbone/views/wgview.js"></script>
-	<script src="./backbone/views/fgview.js"></script>
+	<script src="./backbone/views/putWGview.js"></script>
+	<script src="./backbone/views/putFGview.js"></script>
 	<script src="./backbone/views/userview.js"></script>
 
 	<!-- models -->
@@ -128,6 +138,8 @@
 	  		$("#file-file-group").typeahead({
 	  			source : fgcollection.pluck( 'name' ),
 	  			updater: function(item) {
+		       		// Opportunity to execute logic based on selected value
+		        	// ...	  				
 	  				return item;
 	  			},
 	  		});

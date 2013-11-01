@@ -22,7 +22,22 @@ var UserView = Backbone.View.extend({
 	            formData[ el.id ] = $( el ).val();	            
 	        }
 	    });
-	    new Users().create(formData);
+	    new Users().create(formData, {success: function() {
+	    	var sFirst = $('#userCreateForm')[0].elements.firstname.value;
+	    	var sLast = $('#userCreateForm')[0].elements.lastname.value;
+	    	var sEmail = $('#userCreateForm')[0].elements.email.value;
+	    	var sPW = $('#userCreateForm')[0].elements.pw.value;
+
+		    $('#userCreateForm')[0].reset();
+		    $('#userCreateSuccess p').html("<b> Success! </b> New User <b>" 
+		    	+ sFirst + ' ' + sLast 
+		    	+ "</b> successfully created."
+		    	+ "<br /> <br />"
+		    	+ "Email: " + sEmail
+		    	+ "<br />"
+		    	+ "Password: " + sPW);
+		    $('#userCreateSuccess').show();	
+		}});
 	}	
 
 });
