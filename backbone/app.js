@@ -20,13 +20,18 @@ $(function(){
 		} 
 	};
 
+	/* Toggles visibility of data-hide twitter bootstrap alerts */
+    $("[data-hide]").on("click", function(){
+        $("." + $(this).attr("data-hide")).hide();
+    });	
+
 	var myWg = new Wg({});
-	var wgView = new WgView({model: myWg});
-	wgView.render();
+	var wgPutView = new WgPutView({model: myWg});
+	wgPutView.render();
 
 	var myFg = new Fg({});
-	var fgView = new FgView({model: myFg});
-	fgView.render();
+	var fgPutView = new FgPutView({model: myFg});
+	fgPutView.render();
 
 	var myUser = new User({});
 	var userView = new UserView({model: myUser});
@@ -56,10 +61,15 @@ $(function(){
 	// }});
 
 	function uploadComplete(evt) {
+
 		/* This event is raised when the server send back a response */
-		alert(evt.target.responseText);
 		document.getElementById('files-to-upload').value='';
 		$('#file-upload-status').show();
+		console.log("The ID of the saved file: [" + evt.target.responseText + "]");
+		
+		// PUT Working Group (has a list of FG ids)
+		// PUT File Group (has a list of file ids)
+
 	}
 
 	$('#upload-files-form').submit(function(event){

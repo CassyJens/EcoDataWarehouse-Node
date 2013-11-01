@@ -74,8 +74,7 @@ exports.addFile = function(req, res) {
         var gridStore = new GridStore(db, fileId, file.name, 'w', {
             'content_type': file.type,
             'metadata': {
-                'fg': fg,
-                'wg': wg
+                'data': 'may go here'
             },
         });
         var fileSize = fs.statSync(file.path).size;
@@ -92,7 +91,7 @@ exports.addFile = function(req, res) {
             });
         }); 
 
-        res.send('/');     
+        res.send(200, fileId); // send the object id here     
 }
 
 function createFileObject(file) {
