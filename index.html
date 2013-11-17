@@ -13,7 +13,7 @@
 	  <h1>UW-La Crosse <small>Ecological Data Warehouse</small></h1>
 	</div>
 
-	<div id="upload-files" class="container" style="border: 1px solid lightslategray; padding: 10px; background-color: rgb(253, 251, 242)">
+	<div id="upload-files" class="container" style="border: 1px solid lightslategray; padding: 10px;">
 		<fieldset>
 			<legend> Upload Files </legend>
 			<form id="upload-files-form" name="upload-files-form" enctype="multipart/form-data" class="no-margin form-horizontal">
@@ -21,11 +21,17 @@
 					<input id="files-to-upload" type="file" name="file" multiple="multiple" />
 				</div>
 				<div class="control-group">
-					<input type="text" name="file-working-group" id="file-working-group" data-provide="typeahead" placeholder="Working Group">
+					<select multiple="multiple" id="prototypewg" name="prototypewg">
+
+					</select>
 				</div>
-				<div class="control-group">
-					<input type="text" name="file-file-group" id="file-file-group" data-provide="typeahead" placeholder="File Group">
-				</div>
+<!--				
+<div class="control-group">
+	<select multiple="multiple" id="prototypefg" name="prototypefg">
+		
+	</select>
+</div>
+-->				
 				<div id="file-upload-status" class="alert alert-success hidden"> 
 					<button type="button" class="close" data-hide="alert">&times;</button>
 					<b> Success! </b> Your file upload is complete. 
@@ -120,29 +126,26 @@
 		// Populate the working group dropdown for file upload.
 		var wgcollection = new WorkingGroups(); // Instantiate the collection.
 	  	var initiateWGDropDown = function() {
-  			$("#file-working-group").typeahead({
-	    		source : wgcollection.pluck( 'name' ),    	
-		    	updater: function(item) {
-		       		// Opportunity to execute logic based on selected value
-		        	// ...
-		        	return item;
-		    	},
-			});
+	  		var innerHTML = '';
+	  		wgcollection.each(function(model) {
+	  			console.log(model);
+	  			var attributes = model.attributes;
+	  			innerHTML += '<option value=' + attributes._id + '>' + attributes.name + '</option>';
+	  		});
+	  		$('#prototypewg').html(innerHTML);
   		};	
 	  	wgcollection.fetch({success : initiateWGDropDown});
 
 	  	// Do the same for the file group dropdown
 	  	var fgcollection = new FileGroups();
 	  	var initiateFGDropDown = function() {
-	  		console.log("length of fgcollection is: [" + fgcollection.length + "]");
-	  		$("#file-file-group").typeahead({
-	  			source : fgcollection.pluck( 'name' ),
-	  			updater: function(item) {
-		       		// Opportunity to execute logic based on selected value
-		        	// ...	  				
-	  				return item;
-	  			},
+	  		var innerHTML = '';
+	  		fgcollection.each(function(model) {
+	  			console.log(model);
+	  			var attributes = model.attributes;
+	  			innerHTML += '<option value=' + attributes._id + '>' + attributes.name + '</option>';
 	  		});
+	  		$('#prototypefg').html(innerHTML);
 	  	};
 	  	fgcollection.fetch({success : initiateFGDropDown});
 	</script>

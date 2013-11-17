@@ -14,6 +14,7 @@ var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
 
+// GET
 exports.findById = function(req, res) {
  	var id = req.params.id;
  	console.log("Retrieving file: " + id);
@@ -24,6 +25,7 @@ exports.findById = function(req, res) {
  	})
  }
 
+// GET
 exports.findAll = function(req, res) {
     db.collection('files', function(err, collection) {
         collection.find().toArray(function(err, items) {
@@ -32,37 +34,14 @@ exports.findAll = function(req, res) {
     });
 }
 
-exports.addFile = function(req, res) {                 
-
-// body: { theWG: 'Thanks for the pluck method.', theFG: 'undefined' },
-//   files: 
-//    { theFile: 
-//       { domain: null,
-//         _events: {},
-//         _maxListeners: 10,
-//         size: 1523,
-//         path: '/var/folders/vr/37mdmwzj5jlg8rj94l41plrc0000gp/T/fcba6bd6e06edcb2426571a1b24ba8e5',
-//         name: 'Day1.txt',
-//         type: 'text/plain',
-//         hash: null,
-//         lastModifiedDate: Mon Sep 30 2013 18:40:12 GMT-0500 (CDT),
-//         _writeStream: [Object],
-//         open: [Function],
-//         toJSON: [Function],
-//         write: [Function],
-//         end: [Function],
-//         setMaxListeners: [Function],
-//         emit: [Function],
-//         addListener: [Function],
-//         on: [Function],
-//         once: [Function],
-//         removeListener: [Function],
-//         removeAllListeners: [Function],
-//         listeners: [Function] } },
+// PUT
+exports.addFile = function(req, res) {
          
-        var wg = req.body.theWG;
+        var wgs = req.body.theWGs;
         var fg = req.body.theFG;
         var file = req.files.theFile;
+
+        console.log('wgs: ' + wgs);
 
         // file.name;
         // file.type;
@@ -74,7 +53,7 @@ exports.addFile = function(req, res) {
         var gridStore = new GridStore(db, fileId, file.name, 'w', {
             'content_type': file.type,
             'metadata': {
-                'data': 'may go here'
+                'wgs': wgs
             },
         });
         var fileSize = fs.statSync(file.path).size;
@@ -94,14 +73,7 @@ exports.addFile = function(req, res) {
         res.send(200, fileId); // send the object id here     
 }
 
-function createFileObject(file) {
-    var myObject = new Object();
-    myObject.name = file.name;
-    myObject.description = "";
-    myObject.type = file.type;
-    return myObject;
-}
-
+// POST
 exports.updateFile = function(req, res) {
     var id = req.params.id;
     var file = req.body;
@@ -120,6 +92,7 @@ exports.updateFile = function(req, res) {
     });
 }
 
+// DELETE
 exports.deleteFile = function(req, res) {
     var id = req.params.id;
     console.log('Deleting file: ' + id);
@@ -137,6 +110,13 @@ exports.deleteFile = function(req, res) {
 
 //curl -i -X PUT -H 'Content-Type: application/json' -d '{"first": "Cassandra", "Last": "Jens", "email" : "jens.cass@gmail.com", "password" : "password", "wgs" : [], "status" :"ACTIVE"}' http://localhost:3000/files/5222562de5fee97b66000001
 
+function createFileObject(file) {
+    var myObject = new Object();
+    myObject.name = file.name;
+    myObject.description = "";
+    myObject.type = file.type;
+    return myObject;
+}
 
 
 
