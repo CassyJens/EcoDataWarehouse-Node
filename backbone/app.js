@@ -80,12 +80,10 @@ $(function(){
 
   		var fileInput = document.getElementById("files-to-upload");
   		var file, files = fileInput.files;
-  		var workingGroup = $("#file-working-group").val();
-  		var fileGroup = $("#file-file-group").val();
+  		var workingGroups = $('select#prototypewg').val();
 
-  		console.log('Working Group is: [' + workingGroup + "]");
-  		console.log('File Group is: [' + fileGroup + "]");
-  		console.log('Number of files: [' + files.length + "]");
+  		console.log('Number of files: [' + files.length + ']');
+  		console.log('Working Groups are: [' + workingGroups + ']');
 
   		for(var i = 0; i < files.length; i++){
 
@@ -93,8 +91,7 @@ $(function(){
 
   			var fd = new FormData();
   			fd.append("theFile", file);
-  			fd.append("theWG", workingGroup);
-  			fd.append("theFG", fileGroup);
+  			fd.append("theWGs", workingGroups);
 
   	  		var xhr = new XMLHttpRequest();
   			xhr.addEventListener("load", uploadComplete, false);
