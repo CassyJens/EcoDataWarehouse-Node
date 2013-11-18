@@ -37,11 +37,10 @@ exports.findAll = function(req, res) {
 // PUT
 exports.addFile = function(req, res) {
          
-        var wgs = req.body.theWGs;
         var fg = req.body.theFG;
         var file = req.files.theFile;
 
-        console.log('wgs: ' + wgs);
+        console.log('fg: ' + fg);
 
         // file.name;
         // file.type;
@@ -53,7 +52,7 @@ exports.addFile = function(req, res) {
         var gridStore = new GridStore(db, fileId, file.name, 'w', {
             'content_type': file.type,
             'metadata': {
-                'wgs': wgs
+                'fg': fg
             },
         });
         var fileSize = fs.statSync(file.path).size;
