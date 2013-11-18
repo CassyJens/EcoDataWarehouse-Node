@@ -22,12 +22,13 @@ var WgPutView = Backbone.View.extend({
 	            formData[ el.id ] = $( el ).val();	            
 	        }
 	    });
-	    new WorkingGroups().create(formData, {success: function() {
+	    MainApp.myWgs.create(formData, {success: function() {
 	    	var sName = $('#wgCreateForm')[0].elements.name.value;
 		    $('#wgCreateForm')[0].reset();
 		    $('#wgCreateSuccess p').html("<b> Success! </b> Working Group <b>" + sName + "</b> successfully created.");
-		    $('#wgCreateSuccess').show();									        
+		    $('#wgCreateSuccess').show();						        
 		}});
+		MainApp.wgSelectView.render(); // should I do this or count on the change event??
 	}	
 
 });

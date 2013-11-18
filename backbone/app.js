@@ -1,3 +1,5 @@
+var MainApp = {};
+
 $(function(){
 
 	$("input[name='file']").change(function() {
@@ -25,17 +27,50 @@ $(function(){
         $("." + $(this).attr("data-hide")).hide();
     });	
 
-	var myWg = new Wg({});
-	var wgPutView = new WgPutView({model: myWg});
-	wgPutView.render();
+/* PUT FUNCTIONALITY */
 
-	var myFg = new Fg({});
-	var fgPutView = new FgPutView({model: myFg});
-	fgPutView.render();
+	MainApp.myWg = new Wg({});
+	MainApp.wgPutView = new WgPutView({model: MainApp.myWg});
+	MainApp.wgPutView.render();
 
-	var myUser = new User({});
-	var userView = new UserView({model: myUser});
-	userView.render();
+	MainApp.myFg = new Fg({});
+	MainApp.fgPutView = new FgPutView({model: MainApp.myFg});
+	MainApp.fgPutView.render();
+
+	MainApp.myUser = new User({});
+	MainApp.userView = new UserView({model: MainApp.myUser});
+	MainApp.userView.render();
+
+/* END PUT FUNCTIONALITY */
+
+/* COLLECTIONS FUNCTIONALITY */
+
+	var mySuccessTest = function() {console.log("success setting select view");};
+	var myFailTest = function() {console.log("failure setting select view");};
+
+	MainApp.wgSelectView;
+	MainApp.myWgs = new WorkingGroups({});
+	var initiateWgSelectView = function() {
+		console.log("length of wgs collection: [" + MainApp.myWgs.length + "]");
+		MainApp.wgSelectView = new WgSelectView({collection: MainApp.myWgs, success: mySuccessTest, 
+							error: myFailTest});
+		MainApp.wgSelectView.render();
+	
+	};
+	MainApp.myWgs.fetch({success : initiateWgSelectView});
+
+	MainApp.fgSelectView;
+	MainApp.myFgs = new FileGroups({});
+	var initiateFgSelectView = function() {
+		console.log("length of fgs collection: [" + MainApp.myFgs.length + "]");
+		MainApp.fgSelectView = new FgSelectView({collection: MainApp.myFgs, success: mySuccessTest, 
+							error: myFailTest});
+		MainApp.fgSelectView.render();
+	
+	};
+	MainApp.myFgs.fetch({success : initiateFgSelectView});	
+
+/* END COLLECTIONS FUNCTIONALITY */
 
 	// Create a new view and render
 	// var myWg = new Wg({});
@@ -61,15 +96,10 @@ $(function(){
 	// }});
 
 	function uploadComplete(evt) {
-
-		/* This event is raised when the server send back a response */
+		// This event is raised when the server send back a response from file upload
 		document.getElementById('files-to-upload').value='';
 		$('#file-upload-status').show();
 		console.log("The ID of the saved file: [" + evt.target.responseText + "]");
-		
-		// PUT Working Group (has a list of FG ids)
-		// PUT File Group (has a list of file ids)
-
 	}
 
 	$('#upload-files-form').submit(function(event){
@@ -80,10 +110,10 @@ $(function(){
 
   		var fileInput = document.getElementById("files-to-upload");
   		var file, files = fileInput.files;
-  		var workingGroups = $('select#prototypewg').val();
+  		var fileGroup = $('select#prototypefg').val();
 
   		console.log('Number of files: [' + files.length + ']');
-  		console.log('Working Groups are: [' + workingGroups + ']');
+  		console.log('Working Groups are: [' + fileGroup + ']');
 
   		for(var i = 0; i < files.length; i++){
 
@@ -91,7 +121,7 @@ $(function(){
 
   			var fd = new FormData();
   			fd.append("theFile", file);
-  			fd.append("theWGs", workingGroups);
+  			fd.append("theFGs", fileGroup);
 
   	  		var xhr = new XMLHttpRequest();
   			xhr.addEventListener("load", uploadComplete, false);
