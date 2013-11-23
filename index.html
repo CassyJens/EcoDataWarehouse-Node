@@ -100,6 +100,35 @@
 		</fieldset>
 	</div>
 
+<!-- Templates -->
+	<script type="text/template" id="select-wg-template">
+	    <select id="prototypewg" name="prototypewg" class="testclass">
+			<%
+    			_.each(collection, function(item){
+			%>
+    			<option value=<%= item._id %>> 
+    				<%= item.name %>
+    			</option>
+            <%
+                });
+            %>
+	    </select>
+	</script>
+
+	<script type="text/template" id="select-fg-template">
+	    <select id="prototypefg" name="prototypefg"> 
+			<%
+    			_.each(collection, function(item){
+			%>
+    			<option value=<%= item._id %>> 
+    				<%= item.name %>
+    			</option>
+            <%
+                });
+            %>
+	    </select>
+	</script>		
+
 	<!-- assets -->
 	<script src="./assets/js/jquery-1.8.2.min.js"></script>
 	<script src="./assets/js/underscore-min.js"></script>
@@ -126,34 +155,6 @@
 
 	<!-- backbone -->
 	<script src="./backbone/app.js"></script>	
-
-<!-- Templates -->
-	<script type="text/template" id="select-wg-template">
-	    <select id="prototypewg" name="prototypewg">
-			<%
-    			_.each(collection, function(item){
-			%>
-    			<option value=<%= item._id %>> 
-    				<%= item.name %>
-    			</option>
-            <%
-                });
-            %>
-	    </select>
-	</script>
-
-	<script type="text/template" id="select-fg-template">
-	    <select id="prototypefg" name="prototypefg">
-			<%
-    			_.each(collection, function(item){
-			%>
-    			<option value=<%= item._id %>> 
-    				<%= item.name %>
-    			</option>
-            <%
-                });
-            %>
-	    </select>
-	</script>		
+	
 </body>
 </html>

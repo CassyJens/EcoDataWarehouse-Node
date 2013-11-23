@@ -1,3 +1,7 @@
+/*
+* Models a PUT form to create a 
+* new file group. 
+*/
 var FgPutView = Backbone.View.extend({
 	
 	el: '#create-file-group',
@@ -17,9 +21,11 @@ var FgPutView = Backbone.View.extend({
 	addFG: function( e ) {
 	    e.preventDefault();
 	    var formData = {};
+	    formData['wg'] = $('select#prototypefg').val();	    
 	    $( '#fgCreateForm' ).children( 'input' ).each( function( i, el ) {
 	        if( $( el ).val() != '' ){
-	            formData[ el.id ] = $( el ).val();	            
+	        	console.log("el.id " + el.id);
+	            formData[ el.id ] = $( el ).val();            
 	        }
 	    });
 	    MainApp.myFgs.create(formData, {success: function() {
