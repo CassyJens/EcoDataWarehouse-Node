@@ -2,6 +2,8 @@ var MainApp = {};
 
 $(function(){
 
+/* GENERAL STYLE */	
+
 	$("input[name='file']").change(function() {
 		$("#upload-options").show();
 	});	
@@ -27,6 +29,8 @@ $(function(){
         $("." + $(this).attr("data-hide")).hide();
     });	
 
+/* END GENERAL STYLE */
+
 /* PUT FUNCTIONALITY */
 
 	MainApp.myWg = new Wg({});
@@ -43,7 +47,7 @@ $(function(){
 
 /* END PUT FUNCTIONALITY */
 
-/* COLLECTIONS FUNCTIONALITY */
+/* SELECT FUNCTIONALITY */
 
 	var mySuccessTest = function() {console.log("success setting select view");};
 	var myFailTest = function() {console.log("failure setting select view");};
@@ -70,7 +74,7 @@ $(function(){
 	};
 	MainApp.myFgs.fetch({success : initiateFgSelectView});	
 
-/* END COLLECTIONS FUNCTIONALITY */
+/* END SELECT FUNCTIONALITY */
 
 	// Create a new view and render
 	// var myWg = new Wg({});
@@ -95,8 +99,10 @@ $(function(){
 	// 	});
 	// }});
 
+/* FILE FUNCTIONALITY */
+
+	// This event is raised when the server send back a response from file upload
 	function uploadComplete(evt) {
-		// This event is raised when the server send back a response from file upload
 		document.getElementById('files-to-upload').value='';
 		$('#file-upload-status').show();
 		console.log("The ID of the saved file: [" + evt.target.responseText + "]");
@@ -107,27 +113,23 @@ $(function(){
 	});
 
 	$('#upload-files-btn').click(function() {
-
   		var fileInput = document.getElementById("files-to-upload");
   		var file, files = fileInput.files;
   		var fileGroup = $('select#prototypefg').val();
-
   		console.log('Number of files: [' + files.length + ']');
   		console.log('Working Groups are: [' + fileGroup + ']');
-
   		for(var i = 0; i < files.length; i++){
-
-  			file = files[i];
-
   			var fd = new FormData();
+  			file = files[i];
   			fd.append("theFile", file);
   			fd.append("theFGs", fileGroup);
-
   	  		var xhr = new XMLHttpRequest();
   			xhr.addEventListener("load", uploadComplete, false);
 	  		xhr.open("POST", "/files");
 	  		xhr.send(fd);
   		}
 	});
+
+/* END FILE FUNCTIONALITY */	
 
 });

@@ -12,5 +12,5 @@ var WgSelectView = Backbone.View.extend({
 		var renderedContent = this.template({collection : this.collection.toJSON()});
 		$(this.el).html(renderedContent);
 		return this;
-	}	
+	}
 });
