@@ -13,6 +13,7 @@
 	  <h1>UW-La Crosse <small>Ecological Data Warehouse</small></h1>
 	</div>
 
+<<<<<<< HEAD
 	<div id="working-groups">
 		<div id="create-working-group">
 			<fieldset>
@@ -107,6 +108,97 @@
 
 	<script type="text/template" id="select-wg-template">
 	    <select id="prototypewg" name="prototypewg" class="testclass">
+=======
+	<!-- Master Control -->
+	<div class="container">
+		<div id="master-control" class="row">
+			<div class="span4">
+				<b> Active Working Group: </b>
+				<div id="select-working-group">
+
+				</div>
+			</div>
+			<div class="span4">
+				<b> Selected File Group: </b>
+				<div id="select-file-group">
+
+				</div>
+			</div>
+			<div class="span4">
+
+			</div>
+		</div>
+	</div>	
+
+	<!-- File Upload -->
+	<div id="upload-files" class="container" style="border: 1px solid lightslategray; padding: 10px;">
+		<fieldset>
+			<legend> Upload Files </legend>
+			<form id="upload-files-form" name="upload-files-form" enctype="multipart/form-data" class="no-margin form-horizontal">
+				<div class="control-group">	
+					<input id="files-to-upload" type="file" name="file" multiple="multiple" />
+				</div>				
+				<div id="file-upload-status" class="alert alert-success hidden"> 
+					<button type="button" class="close" data-hide="alert">&times;</button>
+					<b> Success! </b> Your file upload is complete. 
+				</div> 	
+				<button type="button" class="btn">Cancel</button>
+		        <input type="submit" id="upload-files-btn" name="submit" value="Upload" class="btn btn-primary">
+			</form>
+		</fieldset>
+	</div>
+
+	<!-- Create New Divs -->
+	<div id="create-working-group">
+		<fieldset>
+			<legend> Working Group </legend>
+			<form id="wgCreateForm" action="#" class="form-inline">
+		        <input id="name" placeholder="Name" type="text" />
+		        <input id="description" placeholder="Description" type="text" />
+		        <button class="btn btn-primary" id="addWG">Add</button>
+			</form>
+			<div id="wgCreateSuccess" class="alert alert-success hidden"> 
+				<button type="button" class="close" data-hide="alert">&times;</button>
+				<p><b> Success! </b> Your working group has been created.</p>
+			</div> 				
+		</fieldset>
+	</div>   
+
+	<div id="create-file-group">
+		<fieldset>
+			<legend> File Group </legend>
+			<form id="fgCreateForm" action="#" class="form-inline">
+		        <input id="name" placeholder="Name" type="text" />
+		        <input id="description" placeholder="Description" type="text" />
+		        <button class="btn btn-primary" id="addFG">Add</button>
+			</form>
+			<div id="fgCreateSuccess" class="alert alert-success hidden"> 
+				<button type="button" class="close" data-hide="alert">&times;</button>
+				<p><b> Success! </b> Your file group has been created. </p>
+			</div> 				
+		</fieldset>
+	</div> 	
+
+	<div id="create-user">
+		<fieldset>
+			<legend> User </legend>
+			<form id="userCreateForm" action="#" class="form-inline">
+		        <input id="firstname" placeholder="First" type="text" />
+		        <input id="lastname" placeholder="Last" type="text" />
+		        <input id="email" placeholder="Email" type="text" />
+		        <input id="pw" placeholder="Password" type="text" />
+		        <button class="btn btn-primary" id="addUser">Add</button>
+			</form>
+			<div id="userCreateSuccess" class="alert alert-success hidden"> 
+				<button type="button" class="close" data-hide="alert">&times;</button>
+				<p> <b> Success! </b> Your new user has been created. </p>
+			</div> 				
+		</fieldset>
+	</div>
+
+<!-- Templates -->
+	<script type="text/template" id="select-wg-template">
+	    <select id="prototypewg" name="prototypewg" class="testclass">
 			<%
     			_.each(collection, function(item){
 			%>
@@ -118,6 +210,25 @@
             %>
 	    </select>
 	</script>
+
+	<script type="text/template" id="select-fg-template">
+	    <select id="prototypefg" name="prototypefg"> 
+>>>>>>> 3aff4a17e672105911bdd80a91007482c18a8b8f
+			<%
+    			_.each(collection, function(item){
+			%>
+    			<option value=<%= item._id %>> 
+    				<%= item.name %>
+    			</option>
+            <%
+                });
+            %>
+	    </select>
+<<<<<<< HEAD
+	</script>
+=======
+	</script>		
+>>>>>>> 3aff4a17e672105911bdd80a91007482c18a8b8f
 
 
 	<script type="text/template" id="select-fg-template">
@@ -142,17 +253,23 @@
 	<script src="./assets/js/bootstrap.min.js"></script>
 
 	<!-- views -->
+<<<<<<< HEAD
 	<!-- 
 	<script src="./backbone/views/getWGView.js"></script> 
+=======
+>>>>>>> 3aff4a17e672105911bdd80a91007482c18a8b8f
 	<script src="./backbone/views/putWGview.js"></script>
 	<script src="./backbone/views/putFGview.js"></script>
 	<script src="./backbone/views/userview.js"></script>
 	<script src="./backbone/views/selectWGview.js"></script>
 	<script src="./backbone/views/selectFGview.js"></script>
+<<<<<<< HEAD
 	-->
 	<script src="./backbone/views/workingGroupView.js"></script>
 	<script src="./backbone/views/workingGroupListView.js"></script>
 
+=======
+>>>>>>> 3aff4a17e672105911bdd80a91007482c18a8b8f
 
 	<!-- models -->
 	<script src="./backbone/models/fg.js"></script>
