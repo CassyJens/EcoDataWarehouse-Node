@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 var app = app || {};
+=======
+var MainApp = {};
+>>>>>>> 3aff4a17e672105911bdd80a91007482c18a8b8f
 
 $(function(){
 
@@ -30,6 +34,7 @@ $(function(){
     });	
 
 /* END GENERAL STYLE */
+<<<<<<< HEAD
 
 /* PUT FUNCTIONALITY */
 
@@ -57,6 +62,80 @@ $(function(){
 /* FILE FUNCTIONALITY */
 
 	// Event raised when the server sends back a response from file upload
+=======
+
+/* PUT FUNCTIONALITY */
+
+	MainApp.myWg = new Wg({});
+	MainApp.wgPutView = new WgPutView({model: MainApp.myWg});
+	MainApp.wgPutView.render();
+
+	MainApp.myFg = new Fg({});
+	MainApp.fgPutView = new FgPutView({model: MainApp.myFg});
+	MainApp.fgPutView.render();
+
+	MainApp.myUser = new User({});
+	MainApp.userView = new UserView({model: MainApp.myUser});
+	MainApp.userView.render();
+
+/* END PUT FUNCTIONALITY */
+
+/* SELECT FUNCTIONALITY */
+
+	var mySuccessTest = function() {console.log("success setting select view");};
+	var myFailTest = function() {console.log("failure setting select view");};
+
+	MainApp.wgSelectView;
+	MainApp.myWgs = new WorkingGroups({});
+	var initiateWgSelectView = function() {
+		console.log("length of wgs collection: [" + MainApp.myWgs.length + "]");
+		MainApp.wgSelectView = new WgSelectView({collection: MainApp.myWgs, success: mySuccessTest, 
+							error: myFailTest});
+		MainApp.wgSelectView.render();
+	
+	};
+	MainApp.myWgs.fetch({success : initiateWgSelectView});
+
+	MainApp.fgSelectView;
+	MainApp.myFgs = new FileGroups({});
+	var initiateFgSelectView = function() {
+		console.log("length of fgs collection: [" + MainApp.myFgs.length + "]");
+		MainApp.fgSelectView = new FgSelectView({collection: MainApp.myFgs, success: mySuccessTest, 
+							error: myFailTest});
+		MainApp.fgSelectView.render();
+	
+	};
+	MainApp.myFgs.fetch({success : initiateFgSelectView});	
+
+/* END SELECT FUNCTIONALITY */
+
+	// Create a new view and render
+	// var myWg = new Wg({});
+	// var wgView = new WgView({el: $('#wgs'),model: myWg});
+	// wgView.render();
+	// console.log("rendered");
+
+	// Create and fetch a collection and interact with REST API
+	// create, set and save(), destroy
+	// var WgsCollection = Backbone.Collection.extend({
+	//   model: Wg,
+	//   url: '/wgs'
+	// });
+
+	// var wgCollection = new WorkingGroups();
+	// wgCollection.create({ name: 'My new working group'});
+	// wgCollection.fetch({ success: function(){
+	// 	wgCollection.models.forEach(function(model){
+	// 		model.set({name: 'New Name'});
+	// 		model.save();
+	// 		model.destroy();
+	// 	});
+	// }});
+
+/* FILE FUNCTIONALITY */
+
+	// This event is raised when the server send back a response from file upload
+>>>>>>> 3aff4a17e672105911bdd80a91007482c18a8b8f
 	function uploadComplete(evt) {
 		document.getElementById('files-to-upload').value='';
 		$('#file-upload-status').show();
@@ -85,8 +164,12 @@ $(function(){
   		}
 	});
 
+<<<<<<< HEAD
 /* END FILE FUNCTIONALITY */
 
 	
+=======
+/* END FILE FUNCTIONALITY */	
+>>>>>>> 3aff4a17e672105911bdd80a91007482c18a8b8f
 
 });
