@@ -15,13 +15,16 @@ var UserView = Backbone.View.extend({
 	},
 
 	addUser: function( e ) {
+	    
 	    e.preventDefault();
+	    
 	    var formData = {};
-	    $( '#userCreateForm' ).children( 'input' ).each( function( i, el ) {
-	        if( $( el ).val() != '' ){
-	            formData[ el.id ] = $( el ).val();	            
+	    $('#userCreateForm').children('input').each( function(i, el) {
+	        if( $(el).val() != '' ){
+	            formData[el.id] = $(el).val();	            
 	        }
 	    });
+	    
 	    new Users().create(formData, {success: function() {
 	    	var sFirst = $('#userCreateForm')[0].elements.firstname.value;
 	    	var sLast = $('#userCreateForm')[0].elements.lastname.value;

@@ -1,4 +1,4 @@
-var MainApp = {};
+var app = app || {};
 
 $(function(){
 
@@ -33,75 +33,30 @@ $(function(){
 
 /* PUT FUNCTIONALITY */
 
-	MainApp.myWg = new Wg({});
-	MainApp.wgPutView = new WgPutView({model: MainApp.myWg});
-	MainApp.wgPutView.render();
+/*	app.wgPutView = new WgPutView({model: app.WorkingGroup});
+	app.wgPutView.render();
 
-	MainApp.myFg = new Fg({});
-	MainApp.fgPutView = new FgPutView({model: MainApp.myFg});
-	MainApp.fgPutView.render();
+	app.myFg = new Fg({});
+	app.fgPutView = new FgPutView({model: app.myFg});
+	app.fgPutView.render();
 
-	MainApp.myUser = new User({});
-	MainApp.userView = new UserView({model: MainApp.myUser});
-	MainApp.userView.render();
+	app.myUser = new User({});
+	app.userView = new UserView({model: app.myUser});
+	app.userView.render();
+*/
+
 
 /* END PUT FUNCTIONALITY */
 
 /* SELECT FUNCTIONALITY */
 
-	var mySuccessTest = function() {console.log("success setting select view");};
-	var myFailTest = function() {console.log("failure setting select view");};
-
-	MainApp.wgSelectView;
-	MainApp.myWgs = new WorkingGroups({});
-	var initiateWgSelectView = function() {
-		console.log("length of wgs collection: [" + MainApp.myWgs.length + "]");
-		MainApp.wgSelectView = new WgSelectView({collection: MainApp.myWgs, success: mySuccessTest, 
-							error: myFailTest});
-		MainApp.wgSelectView.render();
-	
-	};
-	MainApp.myWgs.fetch({success : initiateWgSelectView});
-
-	MainApp.fgSelectView;
-	MainApp.myFgs = new FileGroups({});
-	var initiateFgSelectView = function() {
-		console.log("length of fgs collection: [" + MainApp.myFgs.length + "]");
-		MainApp.fgSelectView = new FgSelectView({collection: MainApp.myFgs, success: mySuccessTest, 
-							error: myFailTest});
-		MainApp.fgSelectView.render();
-	
-	};
-	MainApp.myFgs.fetch({success : initiateFgSelectView});	
+	new app.WorkingGroupListView();
 
 /* END SELECT FUNCTIONALITY */
 
-	// Create a new view and render
-	// var myWg = new Wg({});
-	// var wgView = new WgView({el: $('#wgs'),model: myWg});
-	// wgView.render();
-	// console.log("rendered");
-
-	// Create and fetch a collection and interact with REST API
-	// create, set and save(), destroy
-	// var WgsCollection = Backbone.Collection.extend({
-	//   model: Wg,
-	//   url: '/wgs'
-	// });
-
-	// var wgCollection = new WorkingGroups();
-	// wgCollection.create({ name: 'My new working group'});
-	// wgCollection.fetch({ success: function(){
-	// 	wgCollection.models.forEach(function(model){
-	// 		model.set({name: 'New Name'});
-	// 		model.save();
-	// 		model.destroy();
-	// 	});
-	// }});
-
 /* FILE FUNCTIONALITY */
 
-	// This event is raised when the server send back a response from file upload
+	// Event raised when the server sends back a response from file upload
 	function uploadComplete(evt) {
 		document.getElementById('files-to-upload').value='';
 		$('#file-upload-status').show();
@@ -130,6 +85,8 @@ $(function(){
   		}
 	});
 
-/* END FILE FUNCTIONALITY */	
+/* END FILE FUNCTIONALITY */
+
+	
 
 });

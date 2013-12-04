@@ -28,13 +28,13 @@ var FgPutView = Backbone.View.extend({
 	            formData[ el.id ] = $( el ).val();            
 	        }
 	    });
-	    MainApp.myFgs.create(formData, {success: function() {
+	    app.myFgs.create(formData, {success: function() {
 	    	var sName = $('#fgCreateForm')[0].elements.name.value;
 		    $('#fgCreateForm')[0].reset();
 		    $('#fgCreateSuccess p').html("<b> Success! </b> File Group <b>" + sName + "</b> successfully created.");
 		    $('#fgCreateSuccess').show();										        
 		}});
-		MainApp.fgSelectView.render(); // should I do this or count on the change event??		
+		app.fgSelectView.render(); // should I do this or count on the change event??		
 	}	
 
 });

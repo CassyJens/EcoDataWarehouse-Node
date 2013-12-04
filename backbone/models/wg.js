@@ -1,4 +1,6 @@
-var Wg = Backbone.Model.extend({	
+var app = app || {};
+
+app.WorkingGroup = Backbone.Model.extend({	
 	idAttribute: '_id',
 	defaults: {
 		name: 'Working Group',

@@ -13,28 +13,26 @@
 	  <h1>UW-La Crosse <small>Ecological Data Warehouse</small></h1>
 	</div>
 
-	<!-- Master Control -->
-	<div class="container">
-		<div id="master-control" class="row">
-			<div class="span4">
-				<b> Active Working Group: </b>
-				<div id="select-working-group">
+	<div id="working-groups">
+		<div id="create-working-group">
+			<fieldset>
+				<legend> Working Group </legend>
+				<form id="wgCreateForm" action="#" class="form-inline">
+					<div>
+				        <input id="name" placeholder="Name" type="text" />
+				        <input id="description" placeholder="Description" type="text" />
+				        <button class="btn btn-primary" id="add-working-group">Add</button>
+				   	</div>
+				</form>
+				<div id="wgCreateSuccess" class="alert alert-success hidden"> 
+					<button type="button" class="close" data-hide="alert">&times;</button>
+					<p><b> Success! </b> Your working group has been created.</p>
+				</div> 				
+			</fieldset>
+		</div>   		
+	</div>
 
-				</div>
-			</div>
-			<div class="span4">
-				<b> Selected File Group: </b>
-				<div id="select-file-group">
-
-				</div>
-			</div>
-			<div class="span4">
-
-			</div>
-		</div>
-	</div>	
-
-	<!-- File Upload -->
+<!-- File Upload -->
 	<div id="upload-files" class="container" style="border: 1px solid lightslategray; padding: 10px;">
 		<fieldset>
 			<legend> Upload Files </legend>
@@ -46,27 +44,15 @@
 					<button type="button" class="close" data-hide="alert">&times;</button>
 					<b> Success! </b> Your file upload is complete. 
 				</div> 	
-				<button type="button" class="btn">Cancel</button>
 		        <input type="submit" id="upload-files-btn" name="submit" value="Upload" class="btn btn-primary">
+				<button type="button" class="btn">Cancel</button>		        
 			</form>
 		</fieldset>
 	</div>
 
-	<!-- Create New Divs -->
-	<div id="create-working-group">
-		<fieldset>
-			<legend> Working Group </legend>
-			<form id="wgCreateForm" action="#" class="form-inline">
-		        <input id="name" placeholder="Name" type="text" />
-		        <input id="description" placeholder="Description" type="text" />
-		        <button class="btn btn-primary" id="addWG">Add</button>
-			</form>
-			<div id="wgCreateSuccess" class="alert alert-success hidden"> 
-				<button type="button" class="close" data-hide="alert">&times;</button>
-				<p><b> Success! </b> Your working group has been created.</p>
-			</div> 				
-		</fieldset>
-	</div>   
+<!-- Master Control -->
+
+<!-- Create New Divs -->
 
 	<div id="create-file-group">
 		<fieldset>
@@ -90,7 +76,7 @@
 		        <input id="firstname" placeholder="First" type="text" />
 		        <input id="lastname" placeholder="Last" type="text" />
 		        <input id="email" placeholder="Email" type="text" />
-		        <input id="pw" placeholder="Password" type="text" />
+		        <input id="pw" placeholder="Password" type="password" />
 		        <button class="btn btn-primary" id="addUser">Add</button>
 			</form>
 			<div id="userCreateSuccess" class="alert alert-success hidden"> 
@@ -100,7 +86,25 @@
 		</fieldset>
 	</div>
 
+	<div class="workingGroupContainer">
+
+	</div>	
+
 <!-- Templates -->
+
+	<script id="workingGroupTemplate" type="text/template">
+			<li>
+				<%= name %>, <%= description %>, <%= _id %>
+			</li>
+	</script>
+
+<!--
+	<script type="text/template" id="wg-template">
+		<option> 
+			<%= name %>
+		</option>
+	</script>
+
 	<script type="text/template" id="select-wg-template">
 	    <select id="prototypewg" name="prototypewg" class="testclass">
 			<%
@@ -115,6 +119,7 @@
 	    </select>
 	</script>
 
+
 	<script type="text/template" id="select-fg-template">
 	    <select id="prototypefg" name="prototypefg"> 
 			<%
@@ -128,6 +133,7 @@
             %>
 	    </select>
 	</script>		
+-->
 
 	<!-- assets -->
 	<script src="./assets/js/jquery-1.8.2.min.js"></script>
@@ -136,11 +142,17 @@
 	<script src="./assets/js/bootstrap.min.js"></script>
 
 	<!-- views -->
+	<!-- 
+	<script src="./backbone/views/getWGView.js"></script> 
 	<script src="./backbone/views/putWGview.js"></script>
 	<script src="./backbone/views/putFGview.js"></script>
 	<script src="./backbone/views/userview.js"></script>
 	<script src="./backbone/views/selectWGview.js"></script>
 	<script src="./backbone/views/selectFGview.js"></script>
+	-->
+	<script src="./backbone/views/workingGroupView.js"></script>
+	<script src="./backbone/views/workingGroupListView.js"></script>
+
 
 	<!-- models -->
 	<script src="./backbone/models/fg.js"></script>

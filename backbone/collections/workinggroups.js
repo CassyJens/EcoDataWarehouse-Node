@@ -1,4 +1,6 @@
-var WorkingGroups = Backbone.Collection.extend({
-	model: Wg,
+var app = app || {};
+
+app.WorkingGroups = Backbone.Collection.extend({
+	model: app.WorkingGroup,
 	url: '/wgs'
 });
