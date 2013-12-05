@@ -2,6 +2,8 @@ var app = app || {};
 
 $(function(){
 
+	// TODO -- Eliminate unused code and wrap in namespace
+
 	$("input[name='file']").change(function() {
 		$("#upload-options").show();
 	});	
@@ -27,13 +29,7 @@ $(function(){
         $("." + $(this).attr("data-hide")).hide();
     });	
 
-/* END GENERAL STYLE */
-
-/* DISPLAY GROUPS */
-
-	new app.WorkingGroupListView();
-
-/* FILE FUNCTIONALITY */
+	// TODO put file upload and download functionality into namespace 
 
 	// This event is raised when the server send back a response from file upload
 	function uploadComplete(evt) {
@@ -63,4 +59,7 @@ $(function(){
 	  		xhr.send(fd);
   		}
 	});
+
+	new app.WorkingGroupListView();	
+	new app.FileGroupListView();
 });
