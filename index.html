@@ -32,6 +32,25 @@
 		</div>   		
 	</div>
 
+	<div id="file-groups">
+		<div id="create-file-group">
+			<fieldset>
+				<legend> File Group </legend>
+				<form id="fgCreateForm" action="#" class="form-inline">
+					<div>
+				        <input id="name" placeholder="Name" type="text" />
+				        <input id="description" placeholder="Description" type="text" />
+				        <button class="btn btn-primary" id="add-file-group">Add</button>
+				   	</div>
+				</form>
+				<div id="fgCreateSuccess" class="alert alert-success hidden"> 
+					<button type="button" class="close" data-hide="alert">&times;</button>
+					<p><b> Success! </b> Your file group has been created. </p>
+				</div> 				
+			</fieldset>
+		</div> 
+	</div>
+
 <!-- File Upload -->
 	<div id="upload-files" class="container" style="border: 1px solid lightslategray; padding: 10px;">
 		<fieldset>
@@ -51,22 +70,7 @@
 	</div>
 
 <!-- Create New Divs -->
-
-	<div id="create-file-group">
-		<fieldset>
-			<legend> File Group </legend>
-			<form id="fgCreateForm" action="#" class="form-inline">
-		        <input id="name" placeholder="Name" type="text" />
-		        <input id="description" placeholder="Description" type="text" />
-		        <button class="btn btn-primary" id="addFG">Add</button>
-			</form>
-			<div id="fgCreateSuccess" class="alert alert-success hidden"> 
-				<button type="button" class="close" data-hide="alert">&times;</button>
-				<p><b> Success! </b> Your file group has been created. </p>
-			</div> 				
-		</fieldset>
-	</div> 	
-
+	
 	<div id="create-user">
 		<fieldset>
 			<legend> User </legend>
@@ -91,10 +95,26 @@
 <!-- Templates -->
 
 	<script id="workingGroupTemplate" type="text/template">
+		<ul>
 			<li>
-				<%= name %>, <%= description %>
+				<%= name %>
 			</li>
+			<li>
+				<%= description %>
+			</li>
+		</ul>
 	</script>
+
+	<script id="fileGroupTemplate" type="text/template">
+		<ul>
+			<li>
+				<%= name %>
+			</li>
+			<li>
+				<%= description %>
+			</li>
+		</ul>
+	</script>	
 	
 
 	<!-- assets -->
@@ -104,16 +124,10 @@
 	<script src="./assets/js/bootstrap.min.js"></script>
 
 	<!-- views -->
-	<!-- 
-	<script src="./backbone/views/getWGView.js"></script> 
-	<script src="./backbone/views/putWGview.js"></script>
-	<script src="./backbone/views/putFGview.js"></script>
-	<script src="./backbone/views/userview.js"></script>
-	<script src="./backbone/views/selectWGview.js"></script>
-	<script src="./backbone/views/selectFGview.js"></script>
-	-->
 	<script src="./backbone/views/workingGroupView.js"></script>
 	<script src="./backbone/views/workingGroupListView.js"></script>
+	<script src="./backbone/views/fileGroupView.js"></script>
+	<script src="./backbone/views/fileGroupListView.js"></script>
 
 	<!-- models -->
 	<script src="./backbone/models/fg.js"></script>
