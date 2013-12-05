@@ -1,8 +1,8 @@
 var app = app || {};
 
-/*
-	Renders a single working group item.
-*/
+/**
+ *	Renders a single working group item.
+ */
 app.WorkingGroupView = Backbone.View.extend({
 	tagName : 'div',
 	className : 'workingGroupContainer',

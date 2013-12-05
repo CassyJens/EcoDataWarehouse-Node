@@ -1,4 +1,6 @@
-var FileGroups = Backbone.Collection.extend({
+var app = app || {};
+
+app.FileGroups = Backbone.Collection.extend({
 	model: Fg,
 	url: '/fgs'
 });
